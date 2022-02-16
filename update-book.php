@@ -2,6 +2,12 @@
    <head>
         <title>Judith Library System</title>
         <link href="style1.css" rel="stylesheet" type="text/css">   
+       
+        <!--Redirect back to read-books.php page once book has been updated-->
+        <?php if(!empty($_POST['title'])){  ?>
+        <meta http-equiv="refresh" content="1;URL='read-books.php'">
+        <?php }  ?>
+       
     </head>
     <body>
        <?php require_once('nav.php');?>
@@ -21,22 +27,17 @@
             $publisher_fk=$_POST['publisher_fk'];
             
             $sql='UPDATE t_books SET title="'.$title.'", isbn="'.$isbn.'", date_published="'.$date_published.'", author_fk='.$author_fk.', publisher_fk='.$publisher_fk.' WHERE book_id='.$book_id;
-            
-            echo $sql.'<br>';
-
-            
+                    
             if(mysqli_query($con,$sql)){
-                echo 'Book '.$book_id.' has been updated';
+                echo 'Book '.$title.' has been updated';
             }
             else{
                 echo "Error creating Book record: " . mysqli_error($con);
             }
         }
         
-        ?>
-       
-		
-		 <?php
+
+         else{
 		    //process book chosen by user to update
             $book_id=$_GET['book_id'];
         
@@ -112,6 +113,8 @@
            
            <input type="submit" value="Update Book">
        </form>
+        
+        <?php }  ?>
        
        
        <?php mysqli_close($con); //close connection?>
