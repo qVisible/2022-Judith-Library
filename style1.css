@@ -9,7 +9,13 @@ table,tr,td,th{
 th{
     background-color:cornsilk;
 }
+
+
 td img{
+    width:50px;
+}
+
+a img{
     display:block;
     margin-right:auto;
     margin-left:auto;
@@ -22,9 +28,6 @@ table~a{
 	font-family: trebuchet;
 }
 
-td>img{
-    width:50px;
-}
 
 
 
