@@ -23,6 +23,14 @@
             echo '<tr>';
             echo '<td>'.$row['author_id'].'</td>';
             echo '<td>'.$row['author_name'].'</td>';
+            echo '<td><img src="';
+            if($row['author_image']!=''){
+                echo $row['author_image'];
+            }
+            else{
+                echo 'author-images/no-image.png';
+            }
+            echo '"></td>';
             echo '<td><a href="update-author.php?author_id='.$row['author_id'].'"><img src="edit.png"></a></td>';
             echo '<td><a href="delete-author.php?author_id='.$row['author_id'].'"><img src="delete.png"></a></td>';
             echo '</tr>';

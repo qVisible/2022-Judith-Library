@@ -28,7 +28,7 @@
             echo '<tr>';
             echo '<td>'.$row['book_id'].'</td>';
             echo '<td>'.$row['title'].'</td>';
-            echo '<td><img id="cover" src="';
+            echo '<td><img src="';
                 if($row['book_image']!=''){
                     echo $row['book_image'];
                 }

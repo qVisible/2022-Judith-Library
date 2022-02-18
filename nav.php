@@ -1,6 +1,7 @@
 <nav>
 <a href="read-books.php">books</a>
 <a href="read-authors.php">authors</a>
+<a href="read-publishers.php">publishers</a>
     | 
 <a href="get-code.php?filename=<?php
 $currentFile = $_SERVER['PHP_SELF'];
