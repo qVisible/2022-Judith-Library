@@ -11,6 +11,7 @@
        <tr>
            <th>id</th>
            <th>title</th>
+           <th>cover</th>
            <th>isbn</th>
            <th>published</th>
            <th>author</th>
@@ -27,6 +28,14 @@
             echo '<tr>';
             echo '<td>'.$row['book_id'].'</td>';
             echo '<td>'.$row['title'].'</td>';
+            echo '<td><img id="cover" src="';
+                if($row['book_image']!=''){
+                    echo $row['book_image'];
+                }
+                else{
+                    echo 'book-images/no-image.png';
+                }
+            echo '"></td>';
             echo '<td>'.$row['isbn'].'</td>';
             echo '<td>'.$row['date_published'].'</td>';
             echo '<td>'.$row['author_name'].'</td>';
