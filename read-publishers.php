@@ -6,31 +6,38 @@
     <body>
        <?php require_once('nav.php');?>
        <?php require_once('db-connect.php'); //connect to database?>
+       <main>
        <h1>Publishers</h1>
-       <table>
-       <tr>
-           <th>id</th>
-           <th>publisher</th>
-           <th>edit</th>
-           <th>delete</th>
-       </tr>
+   
+       <div id="publisher-container">
        <?php
         $sql="SELECT * FROM t_publishers";
 
         $result=mysqli_query($con,$sql);
 
         while ($row=mysqli_fetch_array($result)){
-            echo '<tr>';
-            echo '<td>'.$row['publisher_id'].'</td>';
-            echo '<td>'.$row['publisher_name'].'</td>';
-            echo '<td><a href="update-publisher.php?publisher_id='.$row['publisher_id'].'"><img src="edit.png"></a></td>';
-            echo '<td><a href="delete-publisher.php?publisher_id='.$row['publisher_id'].'"><img src="delete.png"></a></td>';
-            echo '</tr>';
+            echo '<div id="publisher">';
+            echo '<h2>'.$row['publisher_name'].'</h2>';
+            echo '<span id="publisher_id">id: '.$row['publisher_id'].'</span>';
+            echo '<img src="';
+            if($row['publisher_image']!=''){
+                echo $row['publisher_image'];
+            }
+            else{
+                echo 'publisher-images/no-image.png';
+            }
+            echo '">';
+            echo '<footer><a href="update-publisher.php?publisher_id='.$row['publisher_id'].'"><img src="edit.png"></a>';
+            echo '<a href="delete-publisher.php?publisher_id='.$row['publisher_id'].'"><img src="delete.png"></a></footer>';
+            echo '</div>'.PHP_EOL;
         }
         ?>
-        </table>
-        <a href="create-publisher.php">Add Publisher +</a>
-        <?php mysqli_close($con); //close connection?>
         
+        </div>
+      <div id="sub-nav">
+        <a href="create-publisher.php">Add Publisher +</a>
+      </div>
+        <?php mysqli_close($con); //close connection?>
+       </main>
     </body>
 </html>

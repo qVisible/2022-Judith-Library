@@ -1,7 +1,11 @@
 <html>
    <head>
         <title>Judith Library System</title>
-        <link href="style1.css" rel="stylesheet" type="text/css">   
+        <link href="style1.css" rel="stylesheet" type="text/css">  
+        <!--Redirect back to read-books.php page once book has been updated-->
+        <?php if(!empty($_POST['book_name'])){  ?>
+        <meta http-equiv="refresh" content="0.5;URL='read-books.php'">
+        <?php }  ?> 
     </head>
     <script src="main.js"></script>
 
@@ -128,7 +132,9 @@
            </select>
            <!--end of Publishers Dropdown Menu-->
            
-           
+          <!--Allow user to add book image-->
+          <label>book image</label>
+           <input type="file" name="fileToUpload" id="fileToUpload">  
            
            <input type="submit" value="Add Book">
        </form>

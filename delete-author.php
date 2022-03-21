@@ -2,8 +2,10 @@
    <head>
         <title>Judith Library System</title>
         <link href="style1.css" rel="stylesheet" type="text/css">   
+        <meta http-equiv="refresh" content="0.5;URL='read-authors.php'">
     </head>
     <body>
+        <main>
        <?php require_once('nav.php');?>
        <?php require_once('db-connect.php'); //connect to database?>
        <h1>Delete Author</h1>
@@ -23,6 +25,6 @@
        ?>
               
        <?php mysqli_close($con); //close connection?>
-        
+        </main>
     </body>
 </html>

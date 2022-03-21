@@ -25,8 +25,64 @@
             $date_published=$_POST['date_published'];
             $author_fk=$_POST['author_fk'];
             $publisher_fk=$_POST['publisher_fk'];
+
+
+
+            /*
+            This is book image handling code
+            */
+            $target_dir = "book-images/";
+            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+            // Check if image file is a actual image or fake image
+            if(isset($_POST["submit"])) {
+              $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+              if($check !== false) {
+                echo "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+              } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+              }
+            }
+
+            // Check if file already exists
+            if (file_exists($target_file)) {
+              echo "Sorry, file already exists.";
+              $uploadOk = 0;
+            }
+
+            // Check file size
+            if ($_FILES["fileToUpload"]["size"] > 500000) {
+              echo "Sorry, your file is too large.";
+              $uploadOk = 0;
+            }
+
+            // Allow certain file formats
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif" ) {
+              echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+              $uploadOk = 0;
+            }
+
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+              echo "Sorry, your file was not uploaded.";
+            // if everything is ok, try to upload file
+            } else {
+              if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+              } else {
+                echo "Sorry, there was an error uploading your file.";
+              }
+            }
+            /*
+            End of Book Image Handling Code
+            */
             
-            $sql='UPDATE t_books SET title="'.$title.'", isbn="'.$isbn.'", date_published="'.$date_published.'", author_fk='.$author_fk.', publisher_fk='.$publisher_fk.' WHERE book_id='.$book_id;
+            $sql='UPDATE t_books SET title="'.$title.'", isbn="'.$isbn.'", date_published="'.$date_published.'", author_fk='.$author_fk.', publisher_fk='.$publisher_fk.', book_image="'.$target_file.'" WHERE book_id='.$book_id;
                     
             if(mysqli_query($con,$sql)){
                 echo 'Book '.$title.' has been updated';
@@ -53,7 +109,7 @@
   
        <h1>Update Book</h1>
        
-       <form method="post" action="update-book.php">
+       <form method="post" action="update-book.php"   enctype="multipart/form-data">
            <label>title</label><input type="text" name="title" value="<?php echo $rowBooks['title'] ?>">
            <label>isbn</label><input type="number" name="isbn"  value="<?php echo $rowBooks['isbn'] ?>">
            <label>date published</label><input type="date" name="date_published"  value="<?php echo $rowBooks['date_published'] ?>">
@@ -106,6 +162,10 @@
            ?>
            </select>
            <!--end of Publishers Dropdown Menu-->
+           
+           <!--Edit Book Image-->
+           <label>book image:</label>
+           <input type="file" name="fileToUpload" id="fileToUpload">
 		   
 		   <!--pass book id chosen by user as hidden value - needed for record selection on recursive form processing-->
 		   <input type="hidden" name="book_id" value="<?php echo $book_id?>">         

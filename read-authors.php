@@ -6,39 +6,38 @@
     <body>
        <?php require_once('nav.php');?>
        <?php require_once('db-connect.php'); //connect to database?>
+       <main>
        <h1>Authors</h1>
-       <table>
-       <tr>
-           <th>id</th>
-           <th>author</th>
-           <th>edit</th>
-           <th>delete</th>
-       </tr>
+   
+       <div id="author-container">
        <?php
         $sql="SELECT * FROM t_authors";
 
         $result=mysqli_query($con,$sql);
 
         while ($row=mysqli_fetch_array($result)){
-            echo '<tr>';
-            echo '<td>'.$row['author_id'].'</td>';
-            echo '<td>'.$row['author_name'].'</td>';
-            echo '<td><img src="';
+            echo '<div id="author">';
+            echo '<h2>'.$row['author_name'].'</h2>';
+            echo '<span id="author_id">id: '.$row['author_id'].'</span>';
+            echo '<img src="';
             if($row['author_image']!=''){
                 echo $row['author_image'];
             }
             else{
                 echo 'author-images/no-image.png';
             }
-            echo '"></td>';
-            echo '<td><a href="update-author.php?author_id='.$row['author_id'].'"><img src="edit.png"></a></td>';
-            echo '<td><a href="delete-author.php?author_id='.$row['author_id'].'"><img src="delete.png"></a></td>';
-            echo '</tr>';
+            echo '">';
+            echo '<footer><a href="update-author.php?author_id='.$row['author_id'].'"><img src="edit.png"></a>';
+            echo '<a href="delete-author.php?author_id='.$row['author_id'].'"><img src="delete.png"></a></footer>';
+            echo '</div>'.PHP_EOL;
         }
         ?>
-        </table>
-        <a href="create-author.php">Add Author +</a>
-        <?php mysqli_close($con); //close connection?>
         
+        </div>
+      <div id="sub-nav">
+        <a href="create-author.php">Add Author +</a>
+      </div>
+        <?php mysqli_close($con); //close connection?>
+       </main>
     </body>
 </html>

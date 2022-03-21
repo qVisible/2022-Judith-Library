@@ -2,10 +2,15 @@
    <head>
         <title>Judith Library System</title>
         <link href="style1.css" rel="stylesheet" type="text/css">   
+        <!--Redirect back to read-authors.php page once author has been updated-->
+        <?php if(!empty($_POST['author_name'])){  ?>
+        <meta http-equiv="refresh" content="0.5;URL='read-authors.php'">
+        <?php }  ?>
     </head>
     <script src="main.js"></script>
 
     <body>
+      <main>
        <?php require_once('nav.php');?>
        <?php require_once('db-connect.php'); //connect to database?>
        
@@ -70,7 +75,9 @@
             */
             
             $sql='INSERT INTO t_authors (author_name, author_image)
-            VALUES ("'.$author_name.'", "'.$author_image.'")';
+            VALUES ("'.$author_name.'", "'.$target_file.'")';
+            
+            echo $sql;
             
             if(mysqli_query($con,$sql)){
                 echo 'author '.$author_id.' has been created';
@@ -96,6 +103,6 @@
 
        
        <?php mysqli_close($con); //close connection?>
-        
+      </main>
     </body>
 </html>

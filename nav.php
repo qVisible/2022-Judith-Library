@@ -9,4 +9,3 @@ $parts = Explode('/', $currentFile);
 echo $parts[count($parts) - 1]; //Get the current filename and pass it to the Get Code Page
 ?>">code</a>
 </nav>
-<hr>

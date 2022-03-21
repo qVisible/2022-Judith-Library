@@ -4,8 +4,10 @@
         <link href="style1.css" rel="stylesheet" type="text/css">   
     </head>
     <body>
+        
        <?php require_once('nav.php');?>
        <?php require_once('db-connect.php'); //connect to database?>
+       <main>
        <h1>Book Collection</h1>
        <table>
        <tr>
@@ -46,8 +48,10 @@
         }
         ?>
         </table>
+        <div id="sub-nav">
         <a href="create-book.php">Add Book +</a>
+        </div>
         <?php mysqli_close($con); //close connection?>
-        
+        </main>
     </body>
 </html>
