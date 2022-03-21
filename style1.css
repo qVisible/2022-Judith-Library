@@ -167,6 +167,8 @@ nav{
     align-items: center;
     height:70px;
     background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    position: sticky;
+    top: 0px;
 }
 
 nav a{
@@ -176,8 +178,8 @@ nav a{
     flex-grow: 1;;
 }
 
-nav>a:last-child{
-    flex-grow:5;
+nav:last-child{
+    flex-grow:8;
     text-align: right;
 }
 
