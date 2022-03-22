@@ -131,11 +131,33 @@ footer{
     font-size:small;
 }
 
-footer{
+#publisher>footer{
     display:flex;
     justify-content: center;
     margin-top:5px;
 }
+
+/*styling grid for members*/
+#member{
+    display:grid;
+    grid-template-columns: repeat(3,210px);
+    grid-template-rows: repeat(6);
+    grid-auto-flow: column;
+    text-align: center;
+    margin-bottom:20px;
+    border-top:1px solid grey;
+}
+
+#member>img{
+    grid-row-end:span 6;
+}
+
+#member>footer{
+    display:flex;
+    justify-content: center;
+    margin-top:5px;
+}
+
 
 
 
@@ -158,6 +180,7 @@ input[type=submit] {
     margin-top: 20px;
     grid-column: 2;
 }
+
 
 /*nav bar*/
 nav{
