@@ -3,6 +3,7 @@
 <a href="read-authors.php">authors</a>
 <a href="read-publishers.php">publishers</a>
 <a href="read-members.php">members</a>
+<a href="read-books-copies.php">%</a>
     | 
 <a href="get-code.php?filename=<?php
 $currentFile = $_SERVER['PHP_SELF'];
