@@ -20,7 +20,7 @@
         //recursive form handling
         if(!empty($_POST['title'])){
             $book_id=$_POST['book_id'];
-			$title=$_POST['title'];
+			      $title=$_POST['title'];
             $isbn=$_POST['isbn'];
             $date_published=$_POST['date_published'];
             $author_fk=$_POST['author_fk'];

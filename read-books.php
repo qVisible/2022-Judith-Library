@@ -1,8 +1,21 @@
 <html>
    <head>
         <title>Judith Library System</title>
-        <link href="style1.css" rel="stylesheet" type="text/css">   
+        <link href="style1.css" rel="stylesheet" type="text/css"> 
     </head>
+    <script>
+        /*expand and collapse the copy-info area*/
+        function expand(bookId){
+            if(document.getElementById('copy'+bookId).style.display=='none'){
+                document.getElementById('copy'+bookId).style.display="table-row";
+                document.getElementById('expand'+bookId).src="collapse.png";
+            }
+            else{
+                document.getElementById('copy'+bookId).style.display="none";
+                document.getElementById('expand'+bookId).src="expand.png";
+            }
+        }
+    </script>
     <body>
         
        <?php require_once('nav.php');?>
@@ -11,6 +24,7 @@
        <h1>Book Collection</h1>
        <table>
        <tr>
+           <th></th>
            <th>id</th>
            <th>title</th>
            <th>cover</th>
@@ -22,29 +36,59 @@
            <th>delete</th>
        </tr>
        <?php
+       /*get the result set from the books table in the database*/
         $sql="SELECT * FROM t_books JOIN t_authors ON author_fk=author_id JOIN t_publishers ON publisher_fk=publisher_id";
 
-        $result=mysqli_query($con,$sql);
+        $resultBooks=mysqli_query($con,$sql);
 
-        while ($row=mysqli_fetch_array($result)){
+        while ($rowBooks=mysqli_fetch_array($resultBooks)){
+            /*show the normal book information*/
             echo '<tr>';
-            echo '<td>'.$row['book_id'].'</td>';
-            echo '<td>'.$row['title'].'</td>';
+            echo '<td><a onclick="expand('.$rowBooks['book_id'].')"><img id="expand'.$rowBooks['book_id'].'" src="expand.png" style="width:12px;border:none;"></a></td>';
+            echo '<td>'.$rowBooks['book_id'].'<a onclick="expand('.$rowBooks['book_id'].')"></a></td>';
+            echo '<td>'.$rowBooks['title'].'</td>';
             echo '<td><img src="';
-                if($row['book_image']!=''){
-                    echo $row['book_image'];
+                if($rowBooks['book_image']!=''){
+                    echo $rowBooks['book_image'];
                 }
                 else{
                     echo 'book-images/no-image.png';
                 }
             echo '"></td>';
-            echo '<td>'.$row['isbn'].'</td>';
-            echo '<td>'.$row['date_published'].'</td>';
-            echo '<td>'.$row['author_name'].'</td>';
-            echo '<td>'.$row['publisher_name'].'</td>';
-            echo '<td><a href="update-book.php?book_id='.$row['book_id'].'"><img src="edit.png"></a></td>';
-            echo '<td><a href="delete-book.php?book_id='.$row['book_id'].'"><img src="delete.png"></a></td>';
-            echo '</tr>';
+            echo '<td>'.$rowBooks['isbn'].'</td>';
+            echo '<td>'.$rowBooks['date_published'].'</td>';
+            echo '<td>'.$rowBooks['author_name'].'</td>';
+            echo '<td>'.$rowBooks['publisher_name'].'</td>';
+            echo '<td><a href="update-book.php?book_id='.$rowBooks['book_id'].'"><img src="edit.png"></a></td>';
+            echo '<td><a href="delete-book.php?book_id='.$rowBooks['book_id'].'"><img src="delete.png"></a></td>';
+            echo '</tr>'.PHP_EOL;
+            /*end of normal book information*/
+
+            /*copy info - giving the librarian more information about the copies of each book title*/
+            $sql='SELECT * FROM t_copies WHERE book_fk='.$rowBooks['book_id'];
+
+            $resultCopies=mysqli_query($con,$sql);
+            echo '<tr  id="copy'.$rowBooks['book_id'].'" style="padding:0px;display:none;border-bottom:1px solid lightgrey;">';
+            echo '<td colspan="10">';
+            echo '<div id="copy-info" >';
+            echo '<div id="copy-header">copies ('.mysqli_num_rows($resultCopies).'): '.'</div>';
+            echo '<section>';
+            if (mysqli_num_rows($resultCopies) == 0){
+                echo '0 copies';
+            }
+            else{
+                while ($rowCopies=mysqli_fetch_array($resultCopies)){
+                echo '<div>id: '.$rowCopies['copy_id'].'</div>';
+            }
+            
+            }
+            echo '</section>';
+            echo '<a href="create-copy.php?book_id='.$rowBooks['book_id'].'">Add Copy +</a>';
+            echo '</div>';
+            echo '</td>';
+            echo '</tr>'.PHP_EOL;
+            /*end of copy-info section*/
+            
         }
         ?>
         </table>
