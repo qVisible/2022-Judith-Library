@@ -65,7 +65,7 @@
             /*end of normal book information*/
 
             /*copy info - giving the librarian more information about the copies of each book title*/
-            $sql='SELECT * FROM t_copies WHERE book_fk='.$rowBooks['book_id'];
+            $sql='SELECT DISTINCT copy_id FROM t_copies LEFT JOIN t_loans ON copy_id=copy_fk WHERE book_fk='.$rowBooks['book_id'];
 
             $resultCopies=mysqli_query($con,$sql);
             echo '<tr  id="copy'.$rowBooks['book_id'].'" style="padding:0px;display:none;border-bottom:1px solid lightgrey;">';
@@ -78,11 +78,26 @@
             }
             else{
                 while ($rowCopies=mysqli_fetch_array($resultCopies)){
-                echo '<div>id: '.$rowCopies['copy_id'].'</div>';
+                echo '<div>id: '.$rowCopies['copy_id'];
+                
+                $sqlOnLoan='SELECT * FROM t_loans WHERE copy_fk='.$rowCopies['copy_id'].' ORDER BY date_returned LIMIT 1';
+                
+                $resultOnLoan=mysqli_query($con,$sqlOnLoan);
+                $rowOnLoan=mysqli_fetch_array($resultOnLoan);
+
+                if (mysqli_num_rows($resultOnLoan) != 0 && is_null($rowOnLoan['date_returned'])){
+                    echo '<span id="loan_status" style="color:red">On Loan</span>';
+                }
+                else{
+                    echo '<span id="loan_status">Check Shelf</span>';
+                }
+                echo '</div>';
             }
             
             }
+         
             echo '</section>';
+
             echo '<a href="create-copy.php?book_id='.$rowBooks['book_id'].'">Add Copy +</a>';
             echo '</div>';
             echo '</td>';

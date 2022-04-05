@@ -2,23 +2,23 @@
    <head>
         <title>Judith Library System</title>
         <link href="style1.css" rel="stylesheet" type="text/css">   
-        <meta http-equiv="refresh" content="1;URL='read-books.php'">  
+        <meta http-equiv="refresh" content="0.5;URL='read-loans.php'">
     </head>
     <body>
        <?php require_once('nav.php');?>
        <?php require_once('db-connect.php'); //connect to database?>
-       <h1>Create Copy</h1>
+       <h1>Delete Loan</h1>
       
        <?php
-            $book_id=$_GET['book_id'];
-        
-            $sql = 'INSERT INTO t_copies (book_fk) VALUES ("'.$book_id.'")';
+            $loan_id=$_GET['loan_id'];
+
+            $sql = 'UPDATE t_loans SET date_returned="'.date("Y-m-d").'" WHERE loan_id='.$loan_id;
 
             if(mysqli_query($con,$sql)){
-                echo 'Copy Created.';
+                echo 'Loan '.$loan_id.' has been returned';
             }
             else{
-                echo "Error creating copy record: " . mysqli_error($con);
+                echo "Error returning loan - record entry: " . mysqli_error($con);
             }
         
        ?>
