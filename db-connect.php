@@ -3,9 +3,8 @@
 
 
 <?php
-$con=mysqli_connect("localhost", "root", "root", "DB_LIBRARY");
-//$con=mysqli_connect("localhost", "jane", "Consolid&&10", "DB_LIBRARY_2020");	
-//$con = mysqli_connect("localhost", "joe", "Consolid&&10", "DB_LIBRARY_2020");
+
+$con = mysqli_connect("localhost", "joe", "Consolid&&10", "DB_LIBRARY_2020");
 		
 		
 
