@@ -1,6 +1,7 @@
 <html>
    <head>
         <title>Judith Library System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="style1.css" rel="stylesheet" type="text/css">   
         <meta http-equiv="refresh" content="0.5;URL='read-authors.php'">
     </head>

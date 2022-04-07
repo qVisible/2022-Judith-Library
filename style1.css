@@ -9,7 +9,7 @@ main{
 }
 
 #loan_status{
-    margin-left:150px;
+    margin-left:30px;
 }
 h1{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -171,8 +171,10 @@ footer{
     border-top:1px solid grey;
 }
 
-#member>img{
+#member>img, h3{
     grid-row-end:span 6;
+    align-self: center;
+    justify-self: right;
 }
 
 #member>footer{
@@ -249,3 +251,81 @@ nav:last-child{
     font-size:1.5em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+@media screen and (max-width: 900px) {
+    table,tr,td, h1{
+        font-size:0.9em;
+    }
+    
+    td:nth-child(2),th:nth-child(2),td:nth-child(5),th:nth-child(5), td:nth-child(6),th:nth-child(6){
+        display:none;
+    }
+
+    nav{
+        padding:3px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        height:50px;    
+    }
+    
+    nav a{
+        font-size:0.8em;
+ 
+    }
+
+    nav>div{
+        order:-1;
+        flex:0 0 100%;
+        width:50%;
+        text-align: center;;
+    }
+    
+    nav>div>img{    
+        height:30px;
+        display:inline-block;
+
+
+    }
+
+
+    #publisher-container {
+
+        grid-template-columns: repeat(1, auto);
+        justify-content: center;
+    }
+
+
+    /*styling grid for members*/
+#member{
+    display:grid;
+    grid-template-columns: repeat(1,auto);
+    grid-template-rows: repeat(2);
+    grid-auto-flow: row;
+    margin-bottom:10px;
+
+}
+
+#member>img{
+    grid-row-end:auto;
+    height:120px;
+    align-self:flex-start;
+    justify-self: center;
+}
+
+h3{
+    justify-self: center; 
+    margin-bottom:1px;
+}
+
+#member>footer{
+    display:flex;
+    justify-content: center;
+    margin-top:5px;
+}
+#member-loans{
+    font-size:0.8em;
+    width:100%;
+    
+}
+  }

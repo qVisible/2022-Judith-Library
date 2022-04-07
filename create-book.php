@@ -1,6 +1,7 @@
 <html>
    <head>
         <title>Judith Library System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="style1.css" rel="stylesheet" type="text/css">  
         <!--Redirect back to read-books.php page once book has been updated-->
         <?php if(!empty($_POST['book_name'])){  ?>

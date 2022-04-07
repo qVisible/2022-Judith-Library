@@ -1,6 +1,7 @@
 <html>
    <head>
         <title>Judith Library System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="style1.css" rel="stylesheet" type="text/css">  
         <!--Redirect back to read-loans.php page once loan has been updated-->
         <?php if(!empty($_POST['member_fk'])){  ?>

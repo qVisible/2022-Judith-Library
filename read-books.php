@@ -1,6 +1,7 @@
 <html>
    <head>
         <title>Judith Library System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="style1.css" rel="stylesheet" type="text/css"> 
     </head>
     <script>
@@ -80,13 +81,13 @@
                 while ($rowCopies=mysqli_fetch_array($resultCopies)){
                 echo '<div>id: '.$rowCopies['copy_id'];
                 
-                $sqlOnLoan='SELECT * FROM t_loans WHERE copy_fk='.$rowCopies['copy_id'].' ORDER BY date_returned LIMIT 1';
+                $sqlOnLoan='SELECT * FROM t_loans JOIN t_members ON member_fk=member_id WHERE copy_fk='.$rowCopies['copy_id'].' ORDER BY date_returned LIMIT 1';
                 
                 $resultOnLoan=mysqli_query($con,$sqlOnLoan);
                 $rowOnLoan=mysqli_fetch_array($resultOnLoan);
 
                 if (mysqli_num_rows($resultOnLoan) != 0 && is_null($rowOnLoan['date_returned'])){
-                    echo '<span id="loan_status" style="color:red">On Loan</span>';
+                    echo '<span id="loan_status" style="color:red">On Loan</span> to '.$rowOnLoan['forename'].' '.$rowOnLoan['surname'];
                 }
                 else{
                     echo '<span id="loan_status">Check Shelf</span>';

@@ -1,6 +1,7 @@
 <html>
    <head>
         <title>Judith Library System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="style1.css" rel="stylesheet" type="text/css">   
     </head>
     <script src="main.js"></script>
